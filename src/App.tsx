@@ -1,8 +1,8 @@
-import React, {ReactElement} from 'react';
-import {Router} from "./router";
+import React, {type ReactElement} from 'react';
+import {Router} from './router';
 
 function App(): ReactElement {
-  return <Router />;
+	return <Router />;
 }
 
 export default App;
