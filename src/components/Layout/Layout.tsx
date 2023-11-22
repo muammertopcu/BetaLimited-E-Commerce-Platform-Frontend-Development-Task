@@ -1,5 +1,6 @@
 import React, {type ReactElement} from 'react';
 import {Header} from '@/components';
+import './Layout.scss';
 
 interface LayoutProps {
 	children: ReactElement;
