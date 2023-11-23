@@ -3,7 +3,7 @@ import {CartItem, type Product} from '@/types';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '@/redux/store';
 import {addToCart, getCart, subtractFromCart} from '@/redux/slices/cartSlice';
-import {CartActionCard} from '@/components';
+import {CartActionCard, Image} from '@/components';
 
 interface ProductCardProps {
 	product: Product;
@@ -24,10 +24,10 @@ const ProductCard = ({product, cartItem}: ProductCardProps) => {
 	};
 
 	return (
-		<Box boxShadow={1} borderRadius={1} p={3} position={'relative'}>
-			<img src={product.image} alt={product.name} width={'100%'}/>
+		<Box boxShadow={1} borderRadius={1} position={'relative'}>
+			<Image src={product.image} alt={product.name}/>
 
-			<Box>
+			<Box p={2}>
 				<Grid container>
 					<Grid item xs={10}>
 
@@ -40,12 +40,11 @@ const ProductCard = ({product, cartItem}: ProductCardProps) => {
 								${product.price}
 							</Typography>
 
-							<Box mx={.3}/>
-
 							<Typography
 								variant={'body2'}
 								color={'text.secondary'}
 								sx={{textDecoration: 'line-through'}}
+								ml={1}
 							>
 								${product.originalPrice}
 							</Typography>
