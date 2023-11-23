@@ -50,15 +50,11 @@ const ProductCard = ({product, cartItem}: ProductCardProps) => {
 					</Grid>
 
 					<Grid item xs={2} display={'flex'} justifyContent={'flex-end'}>
-						{
-							cartItem && (
-								<CartActionCard
-									cartItem={cartItem}
-									addToCartHandler={addToCartHandler}
-									subtractFromCartHandler={subtractFromCartHandler}
-								/>
-							)
-						}
+						<CartActionCard
+							cartItem={cartItem}
+							addToCartHandler={addToCartHandler}
+							subtractFromCartHandler={subtractFromCartHandler}
+						/>
 					</Grid>
 				</Grid>
 			</Box>

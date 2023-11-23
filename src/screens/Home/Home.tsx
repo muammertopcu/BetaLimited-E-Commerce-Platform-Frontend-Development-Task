@@ -28,7 +28,7 @@ function Home(): ReactElement {
 						<Grid item xs={12} sm={6} md={4} key={product.id}>
 							<ProductCard
 								product={product}
-								cartItem={cart.find((item) => item.productId === product.id)}
+								cartItem={cart?.find((item) => item.productId === product.id)}
 							/>
 						</Grid>
 					))

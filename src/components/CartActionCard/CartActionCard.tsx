@@ -5,7 +5,7 @@ import {type CartItem} from '@/types';
 interface CartActionCardProps {
 	addToCartHandler: () => void;
 	subtractFromCartHandler: () => void;
-	cartItem: CartItem;
+	cartItem?: CartItem;
 }
 
 const CartActionCard = ({addToCartHandler, subtractFromCartHandler, cartItem}: CartActionCardProps) => {
@@ -13,16 +13,16 @@ const CartActionCard = ({addToCartHandler, subtractFromCartHandler, cartItem}: C
 		<Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
 			<Remove color={'primary'} onClick={subtractFromCartHandler} sx={{
 				cursor: 'pointer',
-				opacity: cartItem.quantity ? 1 : 0,
+				opacity: cartItem?.quantity ? 1 : 0,
 				border: '1px solid',
 				borderColor: 'primary',
 				borderRadius: 1,
 			}}/>
 
 			<Typography variant={'body1'} color={'text.primary'} my={1} fontWeight={'bold'} sx={{
-				opacity: cartItem.quantity ? 1 : 0
+				opacity: cartItem?.quantity ? 1 : 0
 			}}>
-				{cartItem.quantity || 0}
+				{cartItem?.quantity || 0}
 			</Typography>
 
 			<Add color={'primary'} onClick={addToCartHandler} sx={{
