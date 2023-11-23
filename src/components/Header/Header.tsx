@@ -1,8 +1,17 @@
 import React, {type ReactElement} from 'react';
 import {AppBar, Container, Grid, Toolbar} from '@mui/material';
 import {SearchInput} from '@/components';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '@/redux/store';
+import {searchProducts} from '@/redux/slices/productSlice';
 
 const Header = (): ReactElement => {
+	const dispatch = useDispatch<AppDispatch>();
+
+	const handleSearch = (value: string) => {
+		dispatch(searchProducts(value));
+	}
+
 	return (
 		<AppBar position={'static'} sx={{backgroundColor: '#FFF'}}>
 			<Container maxWidth={'xl'}>
@@ -18,7 +27,7 @@ const Header = (): ReactElement => {
 						<Grid item xs={12} sm={6} md={8} lg={9} xl={10} mt={1}>
 							<SearchInput
 								placeholder={'Searching for...'}
-								onSearch={(value: string) => console.log(value)}
+								onSearch={handleSearch}
 								disableUnderline={true}
 							/>
 						</Grid>

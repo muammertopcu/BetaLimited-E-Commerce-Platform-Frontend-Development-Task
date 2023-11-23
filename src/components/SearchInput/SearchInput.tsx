@@ -32,7 +32,7 @@ const SearchInput = ({placeholder, disableUnderline, onSearch}: SearchInputProps
 			<Button
 				variant={'contained'}
 				onClick={() => onSearch(searchValue)}
-				sx={{borderRadius: 0}}
+				sx={{borderRadius: 0, px:4}}
 			>
 				Search
 			</Button>
