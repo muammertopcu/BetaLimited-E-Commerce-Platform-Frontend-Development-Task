@@ -20,6 +20,7 @@ export const searchProducts = createAsyncThunk(
 
 export interface ProductSliceState {
 	products: Product[];
+	status?: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: ProductSliceState = {
@@ -33,6 +34,11 @@ const productSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(getProducts.fulfilled, (state, action) => {
 			state.products = action.payload;
+			state.status = 'idle';
+		}).addCase(getProducts.pending, (state) => {
+			state.status = 'loading';
+		}).addCase(getProducts.rejected, (state) => {
+			state.status = 'failed';
 		});
 		builder.addCase(searchProducts.fulfilled, (state, action) => {
 			state.products = action.payload;

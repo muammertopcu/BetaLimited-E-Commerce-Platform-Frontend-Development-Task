@@ -41,11 +41,7 @@ const SearchInput = ({placeholder, disableUnderline, onSearch, resetSearch}: Sea
 				onKeyDown={(e) => e.key === 'Enter' && onSearch(searchValue)}
 			/>
 
-			<Button
-				variant={'contained'}
-				onClick={() => onSearch(searchValue)}
-				sx={{borderRadius: 0, px: 4}}
-			>
+			<Button variant={'contained'} onClick={() => onSearch(searchValue)} sx={{borderRadius: 0, px: 4}}>
 				Search
 			</Button>
 		</Box>
