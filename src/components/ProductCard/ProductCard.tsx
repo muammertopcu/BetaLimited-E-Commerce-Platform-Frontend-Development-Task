@@ -2,7 +2,7 @@ import {Box, Grid, Rating, Typography} from '@mui/material';
 import {CartItem, type Product} from '@/types';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '@/redux/store';
-import {addToCart, getCart, subtractFromCart} from '@/redux/slices/cartSlice';
+import {addToCart, subtractFromCart} from '@/redux/slices/cartSlice';
 import {CartActionCard, Image} from '@/components';
 
 interface ProductCardProps {
@@ -15,12 +15,10 @@ const ProductCard = ({product, cartItem}: ProductCardProps) => {
 
 	const addToCartHandler = () => {
 		dispatch(addToCart(product.id));
-		setTimeout(() => dispatch(getCart()), 100);
 	};
 
 	const subtractFromCartHandler = () => {
 		dispatch(subtractFromCart(product.id));
-		setTimeout(() => dispatch(getCart()), 100);
 	};
 
 	return (

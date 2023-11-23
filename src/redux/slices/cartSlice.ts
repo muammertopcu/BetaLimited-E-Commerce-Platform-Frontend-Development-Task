@@ -13,7 +13,8 @@ export const getCart = createAsyncThunk(
 export const addToCart = createAsyncThunk(
 	'cart/addToCart',
 	async (id: string) => {
-		const {data} = await api.post(`/interview/add-to-cart?id=${id}`);
+		await api.post(`/interview/add-to-cart?id=${id}`);
+		const {data} = await api.get('/interview/view-cart');
 		return data;
 	},
 );
@@ -21,7 +22,8 @@ export const addToCart = createAsyncThunk(
 export const subtractFromCart = createAsyncThunk(
 	'cart/subtractFromCart',
 	async (id: string) => {
-		const {data} = await api.post(`/interview/subtract-from-cart?id=${id}`);
+		await api.post(`/interview/subtract-from-cart?id=${id}`);
+		const {data} = await api.get('/interview/view-cart');
 		return data;
 	},
 );
@@ -40,6 +42,12 @@ const cartSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(getCart.fulfilled, (state, action) => {
+			state.cart = action.payload;
+		});
+		builder.addCase(addToCart.fulfilled, (state, action) => {
+			state.cart = action.payload;
+		});
+		builder.addCase(subtractFromCart.fulfilled, (state, action) => {
 			state.cart = action.payload;
 		});
 	},
