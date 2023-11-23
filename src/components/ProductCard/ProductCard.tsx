@@ -1,43 +1,67 @@
 import {Box, Grid, Rating, Typography} from '@mui/material';
-import {Add, Remove} from '@mui/icons-material';
-import {Product} from '@/types';
+import {CartItem, type Product} from '@/types';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '@/redux/store';
+import {addToCart, getCart, subtractFromCart} from '@/redux/slices/cartSlice';
+import {CartActionCard} from '@/components';
 
 interface ProductCardProps {
 	product: Product;
+	cartItem?: CartItem;
 }
 
-const ProductCard = ({product}: ProductCardProps) => {
+const ProductCard = ({product, cartItem}: ProductCardProps) => {
+	const dispatch = useDispatch<AppDispatch>();
+
+	const addToCartHandler = () => {
+		dispatch(addToCart(product.id));
+		setTimeout(() => dispatch(getCart()), 100);
+	};
+
+	const subtractFromCartHandler = () => {
+		dispatch(subtractFromCart(product.id));
+		setTimeout(() => dispatch(getCart()), 100);
+	};
+
 	return (
 		<Box boxShadow={1} borderRadius={1} p={3} position={'relative'}>
 			<img src={product.image} alt={product.name} width={'100%'}/>
 
 			<Box>
-				<Rating value={product.rating} size={'small'} readOnly/>
-
-				<Typography variant={'body1'} fontWeight={'bold'}>{product.name}</Typography>
-
 				<Grid container>
 					<Grid item xs={10}>
+
+						<Rating value={product.rating} size={'small'} readOnly/>
+
+						<Typography variant={'body1'} fontWeight={'bold'}>{product.name}</Typography>
+
 						<Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
 							<Typography variant={'body1'} color={'primary'} fontWeight={'bold'}>
 								${product.price}
 							</Typography>
+
 							<Box mx={.3}/>
-							<Typography variant={'body2'} color={'text.secondary'}
-										sx={{textDecoration: 'line-through'}}>
+
+							<Typography
+								variant={'body2'}
+								color={'text.secondary'}
+								sx={{textDecoration: 'line-through'}}
+							>
 								${product.originalPrice}
 							</Typography>
 						</Box>
 					</Grid>
 
 					<Grid item xs={2} display={'flex'} justifyContent={'flex-end'}>
-						<Remove color={'primary'} onClick={() => null}/>
-						<Box mx={.5}/>
-						<Typography variant={'body1'} color={'text.primary'} fontWeight={'bold'}>
-							1
-						</Typography>
-						<Box mx={.5}/>
-						<Add color={'primary'} onClick={() => null}/>
+						{
+							cartItem && (
+								<CartActionCard
+									cartItem={cartItem}
+									addToCartHandler={addToCartHandler}
+									subtractFromCartHandler={subtractFromCartHandler}
+								/>
+							)
+						}
 					</Grid>
 				</Grid>
 			</Box>
@@ -52,7 +76,7 @@ const ProductCard = ({product}: ProductCardProps) => {
 				py={0.5}
 				px={2}
 			>
-				<Typography>{product.discount}</Typography>
+				<Typography fontSize={12}>{product.discount}</Typography>
 			</Box>
 		</Box>
 	);
